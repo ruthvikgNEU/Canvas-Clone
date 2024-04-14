@@ -4,6 +4,10 @@
  */
 package uipackage;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  *
  * @author ruthvikg
@@ -13,10 +17,26 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
+    
     public MainJFrame() {
         
         initComponents();
-        MainJPanel.setVisible(true); 
+        connectDatabase();
+       
+    }
+    static Connection connection;
+    public static void connectDatabase(){
+        
+       String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/webapp";
+       String USERNAME = "root";
+       String PASSWORD = "password";
+ try {
+     connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+            System.out.println("Connected to the database!");
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("Failed to connect to the database!");
+        }
     }
 
     /**
@@ -28,26 +48,35 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MainJPanel = new javax.swing.JPanel();
-        ShowButton = new javax.swing.JButton();
-        HideButton = new javax.swing.JButton();
+        FacultyButton = new javax.swing.JButton();
+        AdminButton = new javax.swing.JButton();
+        StudentButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MainJPanel.setBackground(new java.awt.Color(242, 202, 242));
-        MainJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        ShowButton.setText("Show");
-        ShowButton.addActionListener(new java.awt.event.ActionListener() {
+        FacultyButton.setText("Admin");
+        FacultyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ShowButtonActionPerformed(evt);
+                FacultyButtonActionPerformed(evt);
+            }
+        });
+        FacultyButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                FacultyButtonKeyPressed(evt);
             }
         });
 
-        HideButton.setText("Hide");
-        HideButton.addActionListener(new java.awt.event.ActionListener() {
+        AdminButton.setText("Faculty");
+        AdminButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HideButtonActionPerformed(evt);
+                AdminButtonActionPerformed(evt);
+            }
+        });
+
+        StudentButton.setText("Student");
+        StudentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StudentButtonActionPerformed(evt);
             }
         });
 
@@ -55,41 +84,59 @@ public class MainJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 310, Short.MAX_VALUE)
-                .addComponent(MainJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1090, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(ShowButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(HideButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(82, 82, 82)
+                .addComponent(StudentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(167, 167, 167)
+                .addComponent(AdminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
+                .addComponent(FacultyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(470, 470, 470)
+                .addComponent(FacultyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(172, 172, 172))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(HideButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ShowButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                .addComponent(MainJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AdminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StudentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(180, 180, 180))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ShowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowButtonActionPerformed
+    private void FacultyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacultyButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FacultyButtonActionPerformed
 
-MainJPanel.setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_ShowButtonActionPerformed
+    private void AdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminButtonActionPerformed
+      
+LoginFrame frame = new LoginFrame(connection);
+frame.setVisible(true);
+dispose();        
+// TODO add your handling code here:
+    }//GEN-LAST:event_AdminButtonActionPerformed
 
-    private void HideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HideButtonActionPerformed
-MainJPanel.setVisible(false);          // TODO add your handling code here:
-    }//GEN-LAST:event_HideButtonActionPerformed
+    private void FacultyButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FacultyButtonKeyPressed
+        
+LoginFrame frame = new LoginFrame(connection);
+frame.setVisible(true);
+dispose();
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_FacultyButtonKeyPressed
+
+    private void StudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentButtonActionPerformed
+
+LoginFrame frame = new LoginFrame(connection);
+frame.setVisible(true);
+dispose();
+    }//GEN-LAST:event_StudentButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,8 +174,8 @@ MainJPanel.setVisible(false);          // TODO add your handling code here:
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton HideButton;
-    private javax.swing.JPanel MainJPanel;
-    private javax.swing.JButton ShowButton;
+    private javax.swing.JButton AdminButton;
+    private javax.swing.JButton FacultyButton;
+    private javax.swing.JButton StudentButton;
     // End of variables declaration//GEN-END:variables
 }
